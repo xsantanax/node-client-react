@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css"
+import { useEffect, useState } from "react"
+
+const apiUrl = "https://node-server-theta.vercel.app/"
+// const apiUrl = "http://localhost:5000"
 
 function App() {
+  const [serverData, setServerData] = useState({})
+
+  useEffect(() => {
+    fetch(apiUrl)
+      .then((res) => res.json())
+      .then((data) => {
+        setServerData(data)
+      })
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>Server message: {serverData?.message}</div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
